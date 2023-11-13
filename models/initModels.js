@@ -10,6 +10,7 @@ const initModels = () => {
   //User <---> M Order
   User.hasMany(Order, {foreignKey: "userId" });
   Order.belongsTo(User);
+
 };
 
 module.exports = { initModels };
