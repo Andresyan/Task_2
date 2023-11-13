@@ -1,11 +1,12 @@
 const { User } = require("../models/user.model");
 const { Task } = require("../models/task.model");
+const { Order } = require("../models/task.model");
 
 const createUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, lastName, dni, occupation } = req.body;
 
-    const newUser = await User.create({ name, email, password });
+    const newUser = await User.create({ name, lastName, dni, occupation });
 
     res.status(201).json({
       status: "success",
@@ -20,7 +21,7 @@ const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
       where: { status: "active" },
-      include: [{ model: Task }], //attributes: []
+      include: [{ model: Order }], //attributes: []
     });
 
     res.status(200).json({
@@ -34,10 +35,10 @@ const getAllUsers = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { name, lastName, occupation } = req.body;
     const { user } = req;
 
-    await user.update({ name, email });
+    await user.update({ name, lastName, occupation });
     res.status(200).json({
       status: "success",
       data: { user },
