@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/tasks", tasksRouter);
-app.use("/api/v1/orders", tasksRouter);
+app.use("/api/v1/orders", ordersRouter);
 
 app.all("*", (req, res) => {
   res.status(404).json({
