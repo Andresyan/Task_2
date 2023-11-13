@@ -1,6 +1,6 @@
 const { User } = require("../models/user.model");
 const { Task } = require("../models/task.model");
-const { Order } = require("../models/task.model");
+const { Order } = require("../models/order.model");
 
 const createUser = async (req, res) => {
   try {
