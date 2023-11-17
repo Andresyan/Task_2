@@ -33,6 +33,7 @@ const getAllOrders = async (req, res) => {
 
 const getOrderByStatus = async (req, res) => {
   try {
+     const { order } = req;
      const orders = await Order.findOne({
         where: {id: order.id},
     });
