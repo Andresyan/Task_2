@@ -31,7 +31,7 @@ const getAllOrders = async (req, res) => {
   }
 };
 
-const getOrderByStatus = async (req, res) => {
+const getOrderById = async (req, res) => {
   try {
     const { order } = req;
 
@@ -77,7 +77,7 @@ const deleteOrder = async (req, res) => {
 module.exports = {
   createOrder,
   getAllOrders,
-  getOrderByStatus,
+  getOrderById,
   updateOrder,
   deleteOrder,
 };
