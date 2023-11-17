@@ -18,7 +18,7 @@ ordersRouter.post("/", createOrder);
 
 ordersRouter.get("/", getAllOrders);
 
-ordersRouter.get("/:status", getOrderByStatus);
+ordersRouter.get("/:id", getOrderByStatus);
 
 ordersRouter.patch("/:id", updateOrder);
 
