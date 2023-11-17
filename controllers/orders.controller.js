@@ -33,14 +33,14 @@ const getAllOrders = async (req, res) => {
 
 const getOrderByStatus = async (req, res) => {
   try {
-     const { order } = req;
-     const orders = await Order.findOne({
+    const { order } = req;
+
+    const orders = await Order.findOne({
         where: {id: order.id},
     });
-    
     res.status(200).json({
-      status: "success",
-      data: { orders },
+        status: 'success',
+        data: { orders },
     });
   } catch (error) {
     console.log(error);
