@@ -1,13 +1,13 @@
 const dotenv = require("dotenv");
 
 const { app } = require("./app");
-const { cord} = require("cors")
+//const { cord} = require("cors")
 
 const { initModels } = require("./models/initModels");
 const { db } = require("./util/database.util");
 
 dotenv.config({ path: "./config.env" });
-app.use(cors());
+//app.use(cors());
 
 const startServer = async () => {
   try {
