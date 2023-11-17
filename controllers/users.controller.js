@@ -60,6 +60,22 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  try {
+    const { user } = req;
+
+    const users = await User.findOne({
+        where: {id: user.id},
+    });
+    res.status(200).json({
+        status: 'success',
+        data: { users },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAllUsers,
   createUser,
