@@ -34,6 +34,7 @@ const getAllOrders = async (req, res) => {
 const getOrderById = async (req, res) => {
   try {
     const { order } = req;
+    const { id } = req.params
 
     const orders = await Order.findOne({
         where: {id: order.id},
