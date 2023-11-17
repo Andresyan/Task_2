@@ -4,7 +4,7 @@ const { body, validationResult  } = require("express-validator");
 const {
   createOrder,
   getAllOrders,
-  getOrderByStatus,
+  getOrderById,
   updateOrder,
   deleteOrder,
 } = require("../controllers/orders.controller");
@@ -18,7 +18,7 @@ ordersRouter.post("/", createOrder);
 
 ordersRouter.get("/", getAllOrders);
 
-ordersRouter.get("/:id", getOrderByStatus);
+ordersRouter.get("/:id", getOrderById);
 
 ordersRouter.patch("/:id", updateOrder);
 
