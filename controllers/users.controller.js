@@ -1,6 +1,7 @@
 const { User } = require("../models/user.model");
 const { Task } = require("../models/task.model");
 const { Order } = require("../models/order.model");
+const { Op } = require("sequelize");
 
 const createUser = async (req, res) => {
   try {
@@ -19,9 +20,21 @@ const createUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
+    const { name_like } = req.query;
+
+    const whereClause = {
+      status: "active",
+    };
+
+    if (name_like) {
+      whereClause.name = {
+        [Op.iLike]: `%${name_like}%`,
+      };
+    }
+
     const users = await User.findAll({
-      where: { status: "active" },
-      include: [{ model: Order }], //attributes: []
+      where: whereClause,
+      include: [{ model: Order }],
     });
 
     res.status(200).json({
