@@ -1,5 +1,4 @@
 const { User } = require("../models/user.model");
-const { Task } = require("../models/task.model");
 const { Order } = require("../models/order.model");
 const { Op } = require("sequelize");
 
@@ -20,16 +19,39 @@ const createUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const { name_like } = req.query;
+    const { name_and_lastName_like } = req.query;
 
     const whereClause = {
       status: "active",
     };
 
-    if (name_like) {
-      whereClause.name = {
-        [Op.iLike]: `%${name_like}%`,
-      };
+    if (name_and_lastName_like) {
+      whereClause[Op.or] = [
+        {
+          name: {
+            [Op.iLike]: `%${name_and_lastName_like}%`,
+          },
+        },
+        {
+          lastName: {
+            [Op.iLike]: `%${name_and_lastName_like}%`,
+          },
+        },
+        {
+          [Op.and]: [
+            {
+              name: {
+                [Op.iLike]: `%${name_and_lastName_like.split(' ')[0]}%`,
+              },
+            },
+            {
+              lastName: {
+                [Op.iLike]: `%${name_and_lastName_like.split(' ')[1]}%`,
+              },
+            },
+          ],
+        },
+      ];
     }
 
     const users = await User.findAll({
@@ -78,11 +100,11 @@ const getUserById = async (req, res) => {
     const { user } = req;
 
     const users = await User.findOne({
-        where: {id: user.id},
+      where: { id: user.id },
     });
     res.status(200).json({
-        status: 'success',
-        data: { users },
+      status: 'success',
+      data: { users },
     });
   } catch (error) {
     console.log(error);
@@ -96,3 +118,4 @@ module.exports = {
   deleteUser,
   getUserById,
 };
+
