@@ -63,15 +63,21 @@ const updateOrder = async (req, res) => {
 
 const deleteOrder = async (req, res) => {
   try {
-    const { order } = req;
-
+    const { id } = req.params;
+    const order = await Order.findByPk(id);
+    
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
     await order.update({ status: "cancelled" });
 
     res.status(200).json({ status: "successfully cancelled" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 
 module.exports = {
   createOrder,
